@@ -43,9 +43,9 @@ public class LoginActivity extends AppCompatActivity {
 
 
         SharedPreferences pref = getSharedPreferences("login_number", MODE_PRIVATE);
-        String pref_number = pref.getString("PREF_number", "1");
+        String pref_number = pref.getString("PREF_number", "");
         number.setText(pref_number);
-        String pref_password  = pref.getString("PREF_password", "1");
+        String pref_password  = pref.getString("PREF_password", "");
         password.setText("" + pref_password);
 
         nextPageBtn=(Button)findViewById(R.id.button_1);
