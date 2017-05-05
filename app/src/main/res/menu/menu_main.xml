@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.mac.mrje.MainActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_login"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="登入/註冊"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_photoRecord"
+        android:orderInCategory="100"
+        android:title="相片記錄"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_vip"
+        android:orderInCategory="100"
+        android:title="升級VIP"
         app:showAsAction="never" />
 </menu>

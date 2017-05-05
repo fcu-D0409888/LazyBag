@@ -9,34 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button page1;
-    Button page2;
-
-    private static final int EDIT=1;
-    View.OnClickListener P1 = new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this,Main2Activity.class);
-                startActivityForResult(intent,EDIT);
-            }
-    };
-    private static final int EDIT2=2;
-    View.OnClickListener P2 = new View.OnClickListener(){
-        @Override
-        public void onClick(View v){
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this,Main3Activity.class);
-            startActivityForResult(intent,EDIT2);
-        }
-    };
-
-
-
+    ListView lv;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,29 +36,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        page1 = (Button)findViewById(R.id.PAGE1);
-        page1.setOnClickListener(P1);
-        page2 = (Button)findViewById(R.id.PAGE2);
-        page2.setOnClickListener(P2);
+       Spinner spinnerArea = (Spinner)findViewById(R.id.spin_area);
+        ArrayAdapter<CharSequence> areaList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.area,  android.R.layout.simple_spinner_dropdown_item);
+        spinnerArea.setAdapter(areaList);
 
+        Spinner spinnerKind = (Spinner)findViewById(R.id.spin_kind);
+        ArrayAdapter<CharSequence> kindList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.kind,  android.R.layout.simple_spinner_dropdown_item);
+        spinnerKind.setAdapter(kindList);
 
+        ArrayList<AlbumItem> albumlist = new ArrayList<AlbumItem>();
+
+        albumlist.add(new AlbumItem(R.drawable.art, "浪浪野餐日"));
+        albumlist.add(new AlbumItem(R.drawable.picnic, "新藝市集五月場"));
+        AlbumArrayAdapter adapter = new AlbumArrayAdapter(this, albumlist);
+        lv = (ListView)findViewById(R.id.lv);
+        lv.setAdapter(adapter);
+
+        lv.setOnItemClickListener(itemclick);
     }
-    protected void onActivityReslt(int code1,int code2,Intent intent){
 
-        if(intent==null)
-            return;
-        super.onActivityResult(code1,code2,intent);
-
-
-
-
-
-
-    }
-
-
-
-
+    AdapterView.OnItemClickListener itemclick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> av, View view, int position, long id) {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, Main2Activity.class);
+            startActivity(intent);
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -92,10 +79,37 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == R.id.action_login) {
+            /*Intent intent = new Intent();
+            intent.setClass(MainActivity.this, );
+            startActivity(intent);*/
             return true;
         }
-
+        else if(id == R.id.action_photoRecord){
+            /*Intent intent = new Intent();
+            intent.setClass(MainActivity.this, );
+            startActivity(intent);*/
+        }
+        else{
+            /*Intent intent = new Intent();
+            intent.setClass(MainActivity.this, );
+            startActivity(intent);*/
+        }
         return super.onOptionsItemSelected(item);
     }
+    /*protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        String inName;
+
+        if (intent == null)
+            return;
+
+        super.onActivityResult(requestCode, resultCode, intent);
+        switch(requestCode) {
+            case ACTIVITY_SET_NAME:
+                inName = intent.getStringExtra(Main2Activity.KEY_NAME);
+                Toast.makeText(MainActivity.this, "Hello " + inName, Toast.LENGTH_SHORT).show();
+                break;
+        }*/
+
 }
