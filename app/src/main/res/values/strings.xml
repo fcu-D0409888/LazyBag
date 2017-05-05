@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">MR.JE</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_main3">Main3Activity</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_activity_main3">新藝市集五月場</string>
+    <string name="title_activity_main2">浪浪野餐日</string>
         <string-array name="area">
             <item>全部</item>
             <item>北部</item>

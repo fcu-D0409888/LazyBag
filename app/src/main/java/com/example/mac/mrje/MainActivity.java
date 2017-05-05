@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
 
     ListView lv;
+    ImageButton search;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,8 +37,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+        search = (ImageButton)findViewById(R.id.imgbtn_search);
+        search.setOnClickListener(click);
 
-       Spinner spinnerArea = (Spinner)findViewById(R.id.spin_area);
+        Spinner spinnerArea = (Spinner)findViewById(R.id.spin_area);
         ArrayAdapter<CharSequence> areaList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.area,  android.R.layout.simple_spinner_dropdown_item);
         spinnerArea.setAdapter(areaList);
 
@@ -46,21 +50,40 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<AlbumItem> albumlist = new ArrayList<AlbumItem>();
 
-        albumlist.add(new AlbumItem(R.drawable.art, "浪浪野餐日"));
-        albumlist.add(new AlbumItem(R.drawable.picnic, "新藝市集五月場"));
+        albumlist.add(new AlbumItem(R.drawable.picnic, "浪浪野餐日"));
+        albumlist.add(new AlbumItem(R.drawable.art, "新藝市集五月場"));
         AlbumArrayAdapter adapter = new AlbumArrayAdapter(this, albumlist);
         lv = (ListView)findViewById(R.id.lv);
         lv.setAdapter(adapter);
-
         lv.setOnItemClickListener(itemclick);
+
     }
+
+    private View.OnClickListener click = new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+    };
+
 
     AdapterView.OnItemClickListener itemclick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> av, View view, int position, long id) {
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, Main2Activity.class);
-            startActivity(intent);
+           Intent intent = new Intent();
+            switch (position){
+                case 0:
+                    intent.setClass(MainActivity.this, Main2Activity.class);
+                    startActivity(intent);
+                    break;
+                case 1:
+                    intent.setClass(MainActivity.this, Main3Activity.class);
+                    startActivity(intent);
+                    break;
+            }
+
         }
     };
 
