@@ -3,17 +3,19 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_main3">新藝市集五月場</string>
     <string name="title_activity_main2">浪浪野餐日</string>
-        <string-array name="area">
-            <item>全部</item>
-            <item>北部</item>
-            <item>中部</item>
-            <item>南部</item>
-            <item>東部</item>
-            <item>離島</item>
-        </string-array>
-        <string-array name="kind">
-            <item>全部</item>
-            <item>藝文活動</item>
-            <item>景點</item>
-        </string-array>
+    <string-array name="area">
+        <item>全部</item>
+        <item>北部</item>
+        <item>中部</item>
+        <item>南部</item>
+        <item>東部</item>
+        <item>離島</item>
+    </string-array>
+    <string-array name="kind">
+        <item>全部</item>
+        <item>藝文活動</item>
+        <item>景點</item>
+    </string-array>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_page2">Page2</string>
 </resources>

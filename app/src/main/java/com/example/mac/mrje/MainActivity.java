@@ -103,9 +103,9 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_login) {
-            /*Intent intent = new Intent();
-            intent.setClass(MainActivity.this, );
-            startActivity(intent);*/
+            Intent intent = new Intent();
+            intent.setClass(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
             return true;
         }
         else if(id == R.id.action_photoRecord){
