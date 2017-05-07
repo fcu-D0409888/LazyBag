@@ -35,10 +35,13 @@
             android:name=".Page2"
             android:label="@string/title_activity_page2"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".GridActivity" />
         <activity
             android:name=".PhotoActivity"
             android:label="@string/title_activity_photo"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".GridActivity"
+            android:label="@string/title_activity_grid"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
