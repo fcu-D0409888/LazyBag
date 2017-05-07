@@ -18,4 +18,5 @@
     </string-array>
     <string name="title_activity_login">LoginActivity</string>
     <string name="title_activity_page2">Page2</string>
+    <string name="title_activity_photo">PhotoActivity</string>
 </resources>

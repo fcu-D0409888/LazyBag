@@ -6,26 +6,21 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.Spinner;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class PhotoActivity extends AppCompatActivity {
 
-    ListView lv;
-    ImageButton search;
+    ListView lvPhoto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_photo);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -37,56 +32,49 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        search = (ImageButton)findViewById(R.id.imgbtn_search);
-        search.setOnClickListener(click);
+        ArrayList<PhotoAlbumItem> albumlist = new ArrayList<PhotoAlbumItem>();
 
-        Spinner spinnerArea = (Spinner)findViewById(R.id.spin_area);
-        ArrayAdapter<CharSequence> areaList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.area,  android.R.layout.simple_spinner_dropdown_item);
-        spinnerArea.setAdapter(areaList);
-
-        Spinner spinnerKind = (Spinner)findViewById(R.id.spin_kind);
-        ArrayAdapter<CharSequence> kindList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.kind,  android.R.layout.simple_spinner_dropdown_item);
-        spinnerKind.setAdapter(kindList);
-
-        ArrayList<AlbumItem> albumlist = new ArrayList<AlbumItem>();
-
-        albumlist.add(new AlbumItem(R.drawable.picnic, "浪浪野餐日"));
-        albumlist.add(new AlbumItem(R.drawable.art, "新藝市集五月場"));
-        AlbumArrayAdapter adapter = new AlbumArrayAdapter(this, albumlist);
-        lv = (ListView)findViewById(R.id.lv);
-        lv.setAdapter(adapter);
-        lv.setOnItemClickListener(itemclick);
-
+        albumlist.add(new PhotoAlbumItem("浪浪野餐日", R.drawable.ex001));
+        albumlist.add(new PhotoAlbumItem("新藝市集五月場", R.drawable.view001));
+        PhotoAlbumArrayAdapter adapter = new PhotoAlbumArrayAdapter(this, albumlist);
+        lvPhoto = (ListView)findViewById(R.id.lv_photo);
+        lvPhoto.setAdapter(adapter);
+        lvPhoto.setOnItemClickListener(itemclick);
     }
-
-    private View.OnClickListener click = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, MainActivity.class);
-            startActivity(intent);
-        }
-    };
-
-
     AdapterView.OnItemClickListener itemclick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> av, View view, int position, long id) {
-           Intent intent = new Intent();
+            int [] imageIds = null;
+            int columns = 3;
             switch (position){
                 case 0:
-                    intent.setClass(MainActivity.this, Main2Activity.class);
-                    startActivity(intent);
+                    imageIds = new int[6];
+                    imageIds[0] = R.drawable.ex001;
+                    imageIds[1] = R.drawable.ex002;
+                    imageIds[2] = R.drawable.ex003;
+                    imageIds[3] = R.drawable.ex004;
+                    imageIds[4] = R.drawable.ex005;
+                    imageIds[5] = R.drawable.ex006;
+                    columns = 2;
                     break;
                 case 1:
-                    intent.setClass(MainActivity.this, Main3Activity.class);
-                    startActivity(intent);
+                    imageIds = new int[5];
+                    imageIds[0] = R.drawable.view001;
+                    imageIds[1] = R.drawable.view002;
+                    imageIds[2] = R.drawable.view003;
+                    imageIds[3] = R.drawable.view004;
+                    imageIds[4] = R.drawable.view005;
                     break;
             }
 
+            Intent intent = new Intent();
+            intent.setClass(PhotoActivity.this, GridActivity.class);
+            intent.putExtra("KEY_IDS", imageIds);
+            intent.putExtra("KEY_COLUMNS", columns);
+            startActivity(intent);
+
         }
     };
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -104,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_login) {
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this, LoginActivity.class);
+            intent.setClass(PhotoActivity.this, LoginActivity.class);
             startActivity(intent);
             return true;
         }
         else if(id == R.id.action_photoRecord){
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this, PhotoActivity.class);
+            intent.setClass(PhotoActivity.this, PhotoActivity.class);
             startActivity(intent);
         }
         else{
@@ -134,5 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Hello " + inName, Toast.LENGTH_SHORT).show();
                 break;
         }*/
+
 
 }
