@@ -1,7 +1,9 @@
 package com.example.mac.mrje;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -103,9 +105,19 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         else{
-            /*Intent intent = new Intent();
-            intent.setClass(MainActivity.this, );
-            startActivity(intent);*/
+            AlertDialog.Builder ad = new AlertDialog.Builder(this);
+            ad.setTitle("關於升級成會員");
+            ad.setMessage("\n升級成會員即可移除廣告\n\n以及享有購票9折優惠\n");
+
+            DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
+                public void onClick(DialogInterface di, int i){
+
+                }
+            };
+
+            ad.setPositiveButton("立即升級", listener);
+            ad.setNegativeButton("不用了", listener);
+            ad.show();
         }
         return super.onOptionsItemSelected(item);
     }

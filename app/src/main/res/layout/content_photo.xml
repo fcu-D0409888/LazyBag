@@ -20,7 +20,9 @@
             android:id="@+id/textView18"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="相片記錄" />
+            android:text="相片記錄"
+            android:textColor="?android:attr/textColorPrimary"
+            android:textSize="20sp"/>
 
         <ListView
             android:id="@+id/lv_photo"
