@@ -93,12 +93,18 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
+
+       if(id == R.id.action_search){
             Intent intent = new Intent();
-            intent.setClass(MainActivity.this, LoginActivity.class);
+            intent.setClass(MainActivity.this, MainActivity.class);
             startActivity(intent);
-            return true;
         }
+       else if (id == R.id.action_login) {
+           Intent intent = new Intent();
+           intent.setClass(MainActivity.this, LoginActivity.class);
+           startActivity(intent);
+           return true;
+       }
         else if(id == R.id.action_photoRecord){
             Intent intent = new Intent();
             intent.setClass(MainActivity.this, PhotoActivity.class);

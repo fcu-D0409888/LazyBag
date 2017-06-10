@@ -101,7 +101,12 @@ public class LoginActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
+        if(id == R.id.action_search){
+            Intent intent = new Intent();
+            intent.setClass(LoginActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_login) {
             Intent intent = new Intent();
             intent.setClass(LoginActivity.this, LoginActivity.class);
             startActivity(intent);

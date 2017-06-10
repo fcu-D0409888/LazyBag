@@ -82,7 +82,12 @@ public class PhotoActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_login) {
+        if(id == R.id.action_search){
+            Intent intent = new Intent();
+            intent.setClass(PhotoActivity.this, MainActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.action_login) {
             Intent intent = new Intent();
             intent.setClass(PhotoActivity.this, LoginActivity.class);
             startActivity(intent);

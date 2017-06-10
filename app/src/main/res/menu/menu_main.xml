@@ -3,6 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.mac.mrje.MainActivity">
     <item
+        android:id="@+id/action_search"
+        android:orderInCategory="100"
+        android:title="搜尋活動"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_login"
         android:orderInCategory="100"
         android:title="登入/註冊"

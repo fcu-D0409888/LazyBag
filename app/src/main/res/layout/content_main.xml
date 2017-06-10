@@ -20,12 +20,6 @@
             android:layout_height="37dp"
             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/imgbtn_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@android:drawable/ic_menu_search" />
-
             <Spinner
                 android:id="@+id/spin_area"
                 android:layout_width="129dp"
@@ -35,6 +29,12 @@
                 android:id="@+id/spin_kind"
                 android:layout_width="162dp"
                 android:layout_height="match_parent" />
+
+            <ImageButton
+                android:id="@+id/imgbtn_search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@android:drawable/ic_menu_search" />
         </LinearLayout>
 
         <ListView
