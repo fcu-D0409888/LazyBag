@@ -32,6 +32,7 @@
                 android:layout_width="246dp"
                 android:layout_height="wrap_content"
                 android:ems="10"
+                android:hint="請輸入Email"
                 android:inputType="textVisiblePassword" />
 
             <LinearLayout
@@ -56,6 +57,7 @@
                         android:layout_width="249dp"
                         android:layout_height="wrap_content"
                         android:ems="10"
+                        android:hint="請輸入密碼"
                         android:inputType="textPassword"
                         tools:layout_editor_absoluteX="5dp"
                         tools:layout_editor_absoluteY="75dp" />
