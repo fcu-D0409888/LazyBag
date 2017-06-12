@@ -3,6 +3,8 @@ package com.example.mac.mrje;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -23,12 +25,11 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
+
     private static final String TAG = "LoginActivity";
-
     private FirebaseAuth mAuth;
-
     private FirebaseAuth.AuthStateListener mAuthListener;
-
+    private SQLiteDatabase mLazyBagDb;
     EditText number, password;
     Button nextPageBtn;
     Button loginBtn;
@@ -39,6 +40,24 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        //region 初始化資料庫
+        LoginDBOpenHelper loginDBOpenHelper = new LoginDBOpenHelper(getApplicationContext(), CommonPara.DB_FILE, null, 1);
+        mLazyBagDb = loginDBOpenHelper.getWritableDatabase();
+
+
+        // 檢查資料表是否存在，如果不存在就建立一個
+        Cursor cursor = mLazyBagDb.rawQuery("select DISTINCT tbl_name from sqlite_master where tbl_name = '" + CommonPara.DB_USERTABLE + "'", null);
+
+
+        if (cursor != null) {
+            if (cursor.getCount() == 0)    // 沒有資料表，就要建立一個資料表
+                mLazyBagDb.execSQL("CREATE TABLE " + CommonPara.DB_USERTABLE + " (" +
+                        "id TEXT PRIMARY KEY NOT NULL," +
+                        "password TEXT  NOT NULL);");
+
+            cursor.close();
+        }
+        //endregion
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,15 +82,7 @@ public class LoginActivity extends AppCompatActivity {
         password.setText("" + pref_password);
 
         loginBtn=(Button)findViewById(R.id.button);
-        loginBtn.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public  void onClick(View v){
-                Intent intent = new Intent();
-                intent.setClass(LoginActivity.this,MainActivity.class);
-                startActivity(intent);
-                Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_SHORT).show();
-            }
-        });
+
         nextPageBtn=(Button)findViewById(R.id.button_1);
         nextPageBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -108,11 +119,41 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = number.getText().toString();
                 String pass = password.getText().toString();
+
+                //region  登入驗證
                 if(!email.equals("") && !pass.equals("")){
                     mAuth.signInWithEmailAndPassword(email, pass);
+
+                    Cursor c = null;
+                    try {
+                        c = mLazyBagDb.query(true, CommonPara.DB_USERTABLE, new String[]{"id", "password"}, "id= '" + email + "'", null, null, null, null, null);
+
+                        if (c.getCount() > 0) {
+                            c.moveToFirst();
+                            if (c.getString(1).equals(pass)) {
+                                Intent intent = new Intent();
+                                intent.setClass(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                Toast.makeText(LoginActivity.this, "登入成功", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(LoginActivity.this, "密碼錯誤，請重新輸入", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                        else {
+                            Toast.makeText(LoginActivity.this, "無此使用者，請重新輸入", Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (Exception e)
+                    {
+                        Toast.makeText(LoginActivity.this, "無此使用者，請重新輸入", Toast.LENGTH_SHORT).show();
+                    }
                 }else{
                     Toast.makeText(LoginActivity.this, "帳號或密碼不可為空", Toast.LENGTH_SHORT).show();
+
                 }
+                //endregion
+
             }
         });
 
