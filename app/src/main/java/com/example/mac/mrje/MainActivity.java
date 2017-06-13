@@ -42,10 +42,15 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     ImageButton search;
+    Spinner spinnerArea, spinnerKind;
 
     private ActivityArrayAdapter adapter = null;
 
     private static final int LIST_ACTIVITIES = 1;
+
+    private List<ActivityItem> mlsActivities;
+
+    String s = "2017嘉義藝術節：細膩堆疊異地生活的情感與記憶";
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -61,7 +66,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void refreshActivityList(List<ActivityItem> activities) {
         adapter.clear();
-        adapter.addAll(activities);
+        mlsActivities = activities;
+        adapter.addAll(mlsActivities);
 
     }
 
@@ -75,15 +81,15 @@ public class MainActivity extends AppCompatActivity {
         search = (ImageButton)findViewById(R.id.imgbtn_search);
         search.setOnClickListener(click);
 
-        Spinner spinnerArea = (Spinner)findViewById(R.id.spin_area);
+        spinnerArea = (Spinner)findViewById(R.id.spin_area);
         ArrayAdapter<CharSequence> areaList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.area,  android.R.layout.simple_spinner_dropdown_item);
         spinnerArea.setAdapter(areaList);
 
-        Spinner spinnerKind = (Spinner)findViewById(R.id.spin_kind);
+        spinnerKind = (Spinner)findViewById(R.id.spin_kind);
         ArrayAdapter<CharSequence> kindList = ArrayAdapter.createFromResource(MainActivity.this,  R.array.kind,  android.R.layout.simple_spinner_dropdown_item);
         spinnerKind.setAdapter(kindList);
 
-         ListView lvActivities = (ListView)findViewById(R.id.lv);
+        ListView lvActivities = (ListView)findViewById(R.id.lv);
 
         adapter = new ActivityArrayAdapter(this, new ArrayList<ActivityItem>());
         lvActivities.setAdapter(adapter);
@@ -96,9 +102,16 @@ public class MainActivity extends AppCompatActivity {
     private View.OnClickListener click = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
-            Intent intent = new Intent();
-            intent.setClass(MainActivity.this, MainActivity.class);
-            startActivity(intent);
+            List<ActivityItem> filterActivities = new ArrayList<ActivityItem>();
+            for(ActivityItem item: mlsActivities) {
+                if((spinnerArea.getSelectedItemPosition() == 0) && (spinnerKind.getSelectedItemPosition() == 1)){
+                    if(item.getactName().equals(s) ) {
+                        filterActivities.add(item);
+                    }
+                }
+            }
+            adapter.clear();
+            adapter.addAll(filterActivities);
         }
     };
 
@@ -115,25 +128,25 @@ public class MainActivity extends AppCompatActivity {
             List<ActivityItem> lslvActivities = new ArrayList<>();
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                DataSnapshot dsName = ds.child("title");
-                DataSnapshot dssDate = ds.child("startDate");
-                DataSnapshot dseDate = ds.child("endDate");
+                    DataSnapshot dsName = ds.child("title");
+                    DataSnapshot dssDate = ds.child("startDate");
+                    DataSnapshot dseDate = ds.child("endDate");
 
-                String name = (String)dsName.getValue();
-                String startDate = (String)dssDate.getValue();
-                String endDate = (String)dseDate.getValue();
+                    String name = (String) dsName.getValue();
+                    String startDate = (String) dssDate.getValue();
+                    String endDate = (String) dseDate.getValue();
 
-                DataSnapshot dsImg = ds.child("imageUrl");
-                String imgUrl = (String) dsImg.getValue();
-                Bitmap activityImg = getImgBitmap(imgUrl);
+                    DataSnapshot dsImg = ds.child("imageUrl");
+                    String imgUrl = (String) dsImg.getValue();
+                    Bitmap activityImg = getImgBitmap(imgUrl);
 
-                ActivityItem aActivity = new ActivityItem();
-                aActivity.setActName(name);
-                aActivity.setStartDate(startDate);
-                aActivity.setEndDate(endDate);
-                aActivity.setActImgUrl(activityImg);
-                lslvActivities.add(aActivity);
-                Log.v("LazyBag", name + ";" + imgUrl);
+                    ActivityItem aActivity = new ActivityItem();
+                    aActivity.setActName(name);
+                    aActivity.setStartDate(startDate);
+                    aActivity.setEndDate(endDate);
+                    aActivity.setActImgUrl(activityImg);
+                    lslvActivities.add(aActivity);
+                    Log.v("LazyBag", name + ";" + imgUrl);
             }
             Message msg = new Message();
             msg.what = LIST_ACTIVITIES;

@@ -18,6 +18,7 @@
             android:layout_width="111dp"
             android:layout_height="135dp"
             android:scaleType="fitXY"
+            android:layout_margin="20px"
             app:srcCompat="@mipmap/ic_launcher" />
 
         <LinearLayout
