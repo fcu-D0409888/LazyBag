@@ -114,10 +114,14 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             List<ActivityItem> lslvActivities = new ArrayList<>();
             for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
                 DataSnapshot dsName = ds.child("title");
+                DataSnapshot dssDate = ds.child("startDate");
+                DataSnapshot dseDate = ds.child("endDate");
 
                 String name = (String)dsName.getValue();
-
+                String startDate = (String)dssDate.getValue();
+                String endDate = (String)dseDate.getValue();
 
                 DataSnapshot dsImg = ds.child("imageUrl");
                 String imgUrl = (String) dsImg.getValue();
@@ -125,9 +129,11 @@ public class MainActivity extends AppCompatActivity {
 
                 ActivityItem aActivity = new ActivityItem();
                 aActivity.setActName(name);
+                aActivity.setStartDate(startDate);
+                aActivity.setEndDate(endDate);
                 aActivity.setActImgUrl(activityImg);
                 lslvActivities.add(aActivity);
-                Log.v("B&B", name + ";" + imgUrl);
+                Log.v("LazyBag", name + ";" + imgUrl);
             }
             Message msg = new Message();
             msg.what = LIST_ACTIVITIES;
@@ -147,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.v("B&B", databaseError.getMessage());
+                Log.v("LazyBag", databaseError.getMessage());
             }
         });
     }
@@ -186,6 +192,10 @@ public class MainActivity extends AppCompatActivity {
             ActivityItem item = (ActivityItem) getItem(position);
             TextView tvName = (TextView) itemlayout.findViewById(R.id.tv_act);
             tvName.setText(item.getactName());
+            TextView tvsDate = (TextView) itemlayout.findViewById(R.id.tv_start_date);
+            tvsDate.setText("開始日期 : " + item.getStartDate());
+            TextView tveDate = (TextView) itemlayout.findViewById(R.id.tv_end_date);
+            tveDate.setText("結束日期 : " + item.getEndDate());
             ImageView ivActivity = (ImageView) itemlayout.findViewById(R.id.img_act);
             ivActivity.setImageBitmap(item.getactImgUrl());
             return itemlayout;

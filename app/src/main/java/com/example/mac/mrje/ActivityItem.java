@@ -7,10 +7,14 @@ import android.graphics.Bitmap;
  */
 
 public class ActivityItem {
+
     private Bitmap actImgUrl;
 
     private String actName;
 
+    private String startDate;
+
+    private String endDate;
 
 
     public Bitmap getactImgUrl() {
@@ -28,5 +32,22 @@ public class ActivityItem {
     public void setActName(String actName) {
         this.actName = actName;
     }
+
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
 
 }

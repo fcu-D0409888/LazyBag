@@ -33,6 +33,4 @@ public class ActivityDB {
         c.moveToFirst();
         return c.getString(c.getColumnIndex("body"));
     }
-
-
 }

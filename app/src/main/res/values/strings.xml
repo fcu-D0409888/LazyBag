@@ -16,8 +16,4 @@
         <item>藝文活動</item>
         <item>景點</item>
     </string-array>
-    <string name="title_activity_login">LoginActivity</string>
-    <string name="title_activity_page2">Page2</string>
-    <string name="title_activity_photo">PhotoActivity</string>
-    <string name="title_activity_grid">GridActivity</string>
 </resources>
