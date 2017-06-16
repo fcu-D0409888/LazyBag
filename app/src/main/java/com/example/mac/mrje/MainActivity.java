@@ -1,5 +1,6 @@
 package com.example.mac.mrje;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -25,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -50,7 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     private List<ActivityItem> mlsActivities;
 
-    String s = "2017嘉義藝術節：細膩堆疊異地生活的情感與記憶";
+    String [] area = {"全部", "北部", "中部", "南部", "東部" ,"離島"};
+    String [] kind = {"全部", "藝文活動", "景點"};
+
 
     private Handler handler = new Handler() {
         public void handleMessage(Message msg) {
@@ -104,16 +108,112 @@ public class MainActivity extends AppCompatActivity {
         public void onClick(View v) {
             List<ActivityItem> filterActivities = new ArrayList<ActivityItem>();
             for(ActivityItem item: mlsActivities) {
-                if((spinnerArea.getSelectedItemPosition() == 0) && (spinnerKind.getSelectedItemPosition() == 1)){
-                    if(item.getactName().equals(s) ) {
+                if(spinnerArea.getSelectedItemPosition() == 0 && spinnerKind.getSelectedItemPosition() == 0){
+                        filterActivities.add(item);
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 0 && spinnerKind.getSelectedItemPosition() == 1){
+                    if(item.getActKind().equals(kind[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 0 && spinnerKind.getSelectedItemPosition() == 2){
+                    if(item.getActKind().equals(kind[2])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 1 && spinnerKind.getSelectedItemPosition() == 0){
+                    if(item.getActLoc().equals(area[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 1 && spinnerKind.getSelectedItemPosition() == 1){
+                    if(item.getActLoc().equals(area[1]) && item.getActKind().equals(kind[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 1 && spinnerKind.getSelectedItemPosition() == 2){
+                    if(item.getActLoc().equals(area[1]) && item.getActKind().equals(kind[2])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 2 && spinnerKind.getSelectedItemPosition() == 0){
+                    if(item.getActLoc().equals(area[2])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 2 && spinnerKind.getSelectedItemPosition() == 1){
+                    if(item.getActLoc().equals(area[2]) && item.getActKind().equals(kind[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 2 && spinnerKind.getSelectedItemPosition() == 2){
+                    if(item.getActLoc().equals(area[2]) && item.getActKind().equals(kind[2])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 3 && spinnerKind.getSelectedItemPosition() == 0){
+                    if(item.getActLoc().equals(area[3])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 3 && spinnerKind.getSelectedItemPosition() == 1){
+                    if(item.getActLoc().equals(area[3]) && item.getActKind().equals(kind[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 3 && spinnerKind.getSelectedItemPosition() == 2){
+                    if(item.getActLoc().equals(area[3]) && item.getActKind().equals(kind[2])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 4 && spinnerKind.getSelectedItemPosition() == 0){
+                    if(item.getActLoc().equals(area[4])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 4 && spinnerKind.getSelectedItemPosition() == 1){
+                    if(item.getActLoc().equals(area[4]) && item.getActKind().equals(kind[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 4 && spinnerKind.getSelectedItemPosition() == 2){
+                    if(item.getActLoc().equals(area[4]) && item.getActKind().equals(kind[2])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 5 && spinnerKind.getSelectedItemPosition() == 0){
+                    if(item.getActLoc().equals(area[5])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 5 && spinnerKind.getSelectedItemPosition() == 1){
+                    if(item.getActLoc().equals(area[5]) && item.getActKind().equals(kind[1])) {
+                        filterActivities.add(item);
+                    }
+                }
+                else if(spinnerArea.getSelectedItemPosition() == 5 && spinnerKind.getSelectedItemPosition() == 2){
+                    if(item.getActLoc().equals(area[5]) && item.getActKind().equals(kind[2])) {
                         filterActivities.add(item);
                     }
                 }
             }
             adapter.clear();
             adapter.addAll(filterActivities);
+            if( filterActivities.isEmpty()){
+                AlertDialog.Builder ad = new AlertDialog.Builder(MainActivity.this);
+                ad.setMessage("\t\t\t\t\t\t\t\t\t查無資料");
+                DialogInterface.OnClickListener listener = new DialogInterface.OnClickListener(){
+                    public void onClick(DialogInterface di, int i){
+
+                    }
+                };
+                ad.setPositiveButton("                           ", listener);
+                ad.setNegativeButton("確定", listener);
+                ad.show();
+            }
         }
     };
+
 
     class FirebaseThread extends Thread {
 
@@ -131,10 +231,14 @@ public class MainActivity extends AppCompatActivity {
                     DataSnapshot dsName = ds.child("title");
                     DataSnapshot dssDate = ds.child("startDate");
                     DataSnapshot dseDate = ds.child("endDate");
+                    DataSnapshot dsLocation = ds.child("area");
+                    DataSnapshot dsKind = ds.child("kind");
 
                     String name = (String) dsName.getValue();
                     String startDate = (String) dssDate.getValue();
                     String endDate = (String) dseDate.getValue();
+                    String location = (String) dsLocation.getValue();
+                    String kind = (String) dsKind.getValue();
 
                     DataSnapshot dsImg = ds.child("imageUrl");
                     String imgUrl = (String) dsImg.getValue();
@@ -144,9 +248,11 @@ public class MainActivity extends AppCompatActivity {
                     aActivity.setActName(name);
                     aActivity.setStartDate(startDate);
                     aActivity.setEndDate(endDate);
+                    aActivity.setActLoc(location);
+                    aActivity.setActKind(kind);
                     aActivity.setActImgUrl(activityImg);
                     lslvActivities.add(aActivity);
-                    Log.v("LazyBag", name + ";" + imgUrl);
+                    Log.v("LazyBag", name + ";" + imgUrl + ";" + location + ";" + kind);
             }
             Message msg = new Message();
             msg.what = LIST_ACTIVITIES;

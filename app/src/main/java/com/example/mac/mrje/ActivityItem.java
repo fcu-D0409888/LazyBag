@@ -16,6 +16,9 @@ public class ActivityItem {
 
     private String endDate;
 
+    private String actLoc;
+
+    private String actKind;
 
     public Bitmap getactImgUrl() {
         return actImgUrl;
@@ -25,6 +28,22 @@ public class ActivityItem {
         return actName;
     }
 
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public String getEndDate() {
+        return endDate;
+    }
+
+    public String getActLoc() {
+        return actLoc;
+
+    }
+
+    public String getActKind() {
+        return actKind;
+    }
     public void setActImgUrl(Bitmap actImgUrl) {
         this.actImgUrl = actImgUrl;
     }
@@ -33,20 +52,21 @@ public class ActivityItem {
         this.actName = actName;
     }
 
-    public String getStartDate() {
-        return startDate;
-    }
-
     public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public String getEndDate() {
-        return endDate;
-    }
-
     public void setEndDate(String endDate) {
         this.endDate = endDate;
+    }
+
+
+    public void setActLoc(String actLoc) {
+        this.actLoc = actLoc;
+    }
+
+    public void setActKind(String actKind) {
+        this.actKind = actKind;
     }
 
 
