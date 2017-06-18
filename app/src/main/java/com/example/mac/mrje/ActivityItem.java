@@ -20,9 +20,8 @@ public class ActivityItem {
 
     private String actKind;
     //MAC
-    private String des;
-    private String fax;
-    private Bitmap webURL;
+
+    private Bitmap Img;
 
     public Bitmap getactImgUrl() {
         return actImgUrl;
@@ -73,22 +72,19 @@ public class ActivityItem {
         this.actKind = actKind;
     }
     //MAC
-    public void setDes(String des) {
-        this.des = des;
+
+    public Bitmap getActImgUrl() {
+        return actImgUrl;
     }
-    public String getDes() {
-        return des;
+
+    public String getActName() {
+        return actName;
     }
-    public void setFax(String fax) {
-        this.fax = fax;
+
+    public Bitmap getImg() {
+        return Img;
     }
-    public String getFax() {
-        return fax;
-    }
-    public void setWebURL(Bitmap webURL) {
-        this.webURL = webURL;
-    }
-    public Bitmap getWebURL() {
-        return webURL;
+    public void setImg(Bitmap img) {
+        Img = img;
     }
 }

@@ -30,6 +30,13 @@
                 android:textColor="#d21fe6"
                 android:textSize="24dp" />
 
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="169dp"
+                app:srcCompat="@drawable/art" />
+
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
