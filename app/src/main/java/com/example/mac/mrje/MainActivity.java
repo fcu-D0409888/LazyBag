@@ -233,12 +233,20 @@ public class MainActivity extends AppCompatActivity {
                     DataSnapshot dseDate = ds.child("endDate");
                     DataSnapshot dsLocation = ds.child("area");
                     DataSnapshot dsKind = ds.child("kind");
+                //MAC
+                DataSnapshot dsLoc = ds.child("location");
+                DataSnapshot dsUnit = ds.child("masterUnit");
+                DataSnapshot dsDes = ds.child("descriptionFilterHtml");
+                DataSnapshot dsWeb = ds.child("sourceWebPromote");
+                DataSnapshot dsUrl = ds.child("webSales");
+
 
                     String name = (String) dsName.getValue();
                     String startDate = (String) dssDate.getValue();
                     String endDate = (String) dseDate.getValue();
                     String location = (String) dsLocation.getValue();
                     String kind = (String) dsKind.getValue();
+
 
                     DataSnapshot dsImg = ds.child("imageUrl");
                     String imgUrl = (String) dsImg.getValue();
@@ -326,17 +334,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onItemClick(AdapterView<?> av, View view, int position, long id) {
            Intent intent = new Intent();
-            switch (position){
-                case 0:
-                    intent.setClass(MainActivity.this, Main2Activity.class);
-                    startActivity(intent);
-                    break;
-                case 1:
-                    intent.setClass(MainActivity.this, Main3Activity.class);
-                    startActivity(intent);
-                    break;
-            }
-
+            intent.setClass(MainActivity.this, Main2Activity.class);
+            intent.putExtra("switch",position);
+            startActivity(intent);
         }
     };
 
