@@ -114,12 +114,12 @@ public class Main2Activity extends AppCompatActivity {
                         Web = (String) dsWeb.getValue();
                         Url = (String) dsUrl.getValue();
 
-                        DataSnapshot dsImg = ds.child("imageUrl");
+                        /*DataSnapshot dsImg = ds.child("imageUrl");
                         String imgUrl = (String) dsImg.getValue();
                         Bitmap Img= getImgBitmap(imgUrl);
 
                         if(!imgUrl.isEmpty())
-                            imageView.setImageBitmap(Img);
+                           imageView.setImageBitmap(Img);*/
                         textView2.setText(Sdate);
                         textView4.setText(Edate);
                         textView6.setText(Loc);

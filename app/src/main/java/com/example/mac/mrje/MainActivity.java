@@ -234,11 +234,11 @@ public class MainActivity extends AppCompatActivity {
                     DataSnapshot dsLocation = ds.child("area");
                     DataSnapshot dsKind = ds.child("kind");
                 //MAC
-                DataSnapshot dsLoc = ds.child("location");
+               /* DataSnapshot dsLoc = ds.child("location");
                 DataSnapshot dsUnit = ds.child("masterUnit");
                 DataSnapshot dsDes = ds.child("descriptionFilterHtml");
                 DataSnapshot dsWeb = ds.child("sourceWebPromote");
-                DataSnapshot dsUrl = ds.child("webSales");
+                DataSnapshot dsUrl = ds.child("webSales");*/
 
 
                     String name = (String) dsName.getValue();
@@ -324,7 +324,12 @@ public class MainActivity extends AppCompatActivity {
             TextView tveDate = (TextView) itemlayout.findViewById(R.id.tv_end_date);
             tveDate.setText("結束日期 : " + item.getEndDate());
             ImageView ivActivity = (ImageView) itemlayout.findViewById(R.id.img_act);
-            ivActivity.setImageBitmap(item.getactImgUrl());
+            if(item.getactImgUrl() != null){
+                ivActivity.setImageBitmap(item.getactImgUrl());
+            }else{
+                ivActivity.setImageResource(R.drawable.art);
+            }
+
             return itemlayout;
         }
     }
