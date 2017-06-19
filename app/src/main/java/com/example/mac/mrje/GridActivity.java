@@ -3,6 +3,7 @@ package com.example.mac.mrje;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -28,7 +29,11 @@ public class GridActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
+                startActivity(cameraIntent);
             }
+
+
         });
 
         Intent intent = getIntent();
@@ -44,6 +49,8 @@ public class GridActivity extends AppCompatActivity {
         gv.setNumColumns(cols);
         gv.setAdapter(new ImageAdapter(this, imglist));
     }
+
+
 
     public class ImageAdapter extends ArrayAdapter<Integer> {
 
