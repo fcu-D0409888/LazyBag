@@ -17,9 +17,16 @@
         android:orderInCategory="100"
         android:title="相片記錄"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="相片上傳"
+        app:showAsAction="never" />
     <item
         android:id="@+id/action_vip"
         android:orderInCategory="100"
         android:title="升級VIP"
         app:showAsAction="never" />
+
 </menu>

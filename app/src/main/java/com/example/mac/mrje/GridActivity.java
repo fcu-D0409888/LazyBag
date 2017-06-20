@@ -3,7 +3,6 @@ package com.example.mac.mrje;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +15,8 @@ import android.widget.ImageView;
 
 public class GridActivity extends AppCompatActivity {
 
+    private final static int RESULT_SELECT_IMAGE = 100;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +26,18 @@ public class GridActivity extends AppCompatActivity {
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-                Intent cameraIntent = new Intent(MediaStore.INTENT_ACTION_STILL_IMAGE_CAMERA);
-                startActivity(cameraIntent);
+                try {
+                    Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    Intent cameraIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(cameraIntent, RESULT_SELECT_IMAGE);
+
+                } catch(Exception e){
+                    e.printStackTrace();
+                }
             }
 
 
@@ -49,6 +56,7 @@ public class GridActivity extends AppCompatActivity {
         gv.setNumColumns(cols);
         gv.setAdapter(new ImageAdapter(this, imglist));
     }
+
 
 
 

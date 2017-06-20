@@ -3,6 +3,7 @@ package com.example.mac.mrje;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class PhotoActivity extends AppCompatActivity {
@@ -26,18 +28,24 @@ public class PhotoActivity extends AppCompatActivity {
 
         ArrayList<PhotoAlbumItem> albumlist = new ArrayList<PhotoAlbumItem>();
 
-        albumlist.add(new PhotoAlbumItem("浪浪野餐日", R.drawable.ex001));
+        albumlist.add(new PhotoAlbumItem("其他展覽", R.drawable.view005));
         albumlist.add(new PhotoAlbumItem("新藝市集五月場", R.drawable.view001));
+        albumlist.add(new PhotoAlbumItem("浪浪野餐日", R.drawable.ex001));
         PhotoAlbumArrayAdapter adapter = new PhotoAlbumArrayAdapter(this, albumlist);
         lvPhoto = (ListView)findViewById(R.id.lv_photo);
         lvPhoto.setAdapter(adapter);
         lvPhoto.setOnItemClickListener(itemclick);
     }
+
     AdapterView.OnItemClickListener itemclick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> av, View view, int position, long id) {
             int [] imageIds = null;
             int columns = 3;
+
+            File sdroot = Environment.getExternalStorageDirectory();
+            String rpath = sdroot.getPath();
+            String [] imgfiles = null;
             switch (position){
                 case 0:
                     imageIds = new int[6];
@@ -56,12 +64,23 @@ public class PhotoActivity extends AppCompatActivity {
                     imageIds[2] = R.drawable.view003;
                     imageIds[3] = R.drawable.view004;
                     imageIds[4] = R.drawable.view005;
+                    columns = 2;
                     break;
+                case 2:
+                    imgfiles = new String[3];
+                    for (int i=0; i < imgfiles.length; i++) {
+                        imgfiles[i] = rpath + "/view00" + (i+1) + ".jpg";
+                        columns = 2;
+                    }
+                    break;
+
+
             }
 
             Intent intent = new Intent();
             intent.setClass(PhotoActivity.this, GridActivity.class);
             intent.putExtra("KEY_IDS", imageIds);
+            intent.putExtra("KEY_FILES", imgfiles);
             intent.putExtra("KEY_COLUMNS", columns);
             startActivity(intent);
 
@@ -72,6 +91,9 @@ public class PhotoActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    class ActionBarActivity {
     }
 
     @Override
