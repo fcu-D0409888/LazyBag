@@ -26,7 +26,7 @@ import java.io.IOException;
 
 public class uploadimagetoserver extends AppCompatActivity {
     private final String TAG = this.getClass().getName();
-
+//test
     ImageView ivCamera, ivGallery, ivUpload, ivImage;
 
     CameraPhoto cameraPhoto;
