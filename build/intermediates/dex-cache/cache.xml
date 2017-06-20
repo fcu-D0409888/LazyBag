@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/rel072562/AndroidStudioProjects/LazyBag/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="df3ceb858ffa8c717487bf65889c3f5d5aef071b">
+        <dex dex="/Users/rel072562/AndroidStudioProjects/LazyBag/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run-bootstrap_9477da394c032cb4c0a2eb354b6577546b7b614b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rel072562/AndroidStudioProjects/LazyBag/app/libs/PhotoUtil.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6e6b2be10f6247cd3852c8a02f582da8fe1da662">
+        <dex dex="/Users/rel072562/AndroidStudioProjects/LazyBag/app/build/intermediates/transforms/dex/debug/folders/1000/2/PhotoUtil_d520efe5078b795ab8dc5ade15f737a591d44158/classes.dex" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/rel072562/AndroidStudioProjects/LazyBag/app/libs/PhotoUtil.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="6e6b2be10f6247cd3852c8a02f582da8fe1da662">
+        <dex dex="/Users/rel072562/AndroidStudioProjects/LazyBag/app/build/intermediates/pre-dexed/debug/PhotoUtil_d520efe5078b795ab8dc5ade15f737a591d44158.jar" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/rel072562/AndroidStudioProjects/LazyBag/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="25.0.2"
+        sha1="3be78ebc2706b2e1fe2f12d5726887a92d6c183b">
+        <dex dex="/Users/rel072562/AndroidStudioProjects/LazyBag/app/build/intermediates/transforms/dex/debug/folders/1000/10000/instant-run_c885e305d40c8b70a6d0f761f898abe542f91080/classes.dex" />
+    </item>
+
+</items>
